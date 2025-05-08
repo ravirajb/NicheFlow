@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Grid,
   Box,
   Typography,
-  Card,
-  CardContent,
   useTheme,
 } from '@mui/material';
 import {
@@ -21,7 +19,7 @@ import { useAuth } from '../../lib/authProvider';
 import { supabase } from '../../lib/supabase';
 
 const Dashboard: React.FC = () => {
-  const [stats, setStats] = React.useState({
+  const [stats, setStats] = useState({
     clients: 0,
     projects: 0,
     activeProjects: 0,
@@ -75,7 +73,7 @@ const Dashboard: React.FC = () => {
         .select('*', { count: 'exact' })
         .eq('is_read', false);
 
-      // Fetch new files count
+      // Fetch new files count (last 7 days)
       const { count: newFilesCount } = await supabase
         .from('files')
         .select('*', { count: 'exact' })
@@ -96,84 +94,89 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchDashboardStats();
   }, []);
 
   return (
     <Box sx={{
-      p: 2,
       width: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 2,
+      p: 3,
+      mt: 2
     }}>
-      <Typography variant="h4">
+      <Typography variant="h4" sx={{ mb: 3 }}>
         Dashboard
       </Typography>
-      <Grid container spacing={2} sx={{ width: '100%' }}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+            <Typography variant="h6">
+              Overview
+            </Typography>
+          </Box>
+        </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <DashboardCard
-            icon={<People sx={{ fontSize: 40 }} />}
             title="Clients"
             value={stats.clients}
-            color="#1976d2"
+            icon={<People sx={{ fontSize: 40 }} />}
+            color={theme.palette.primary.main}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <DashboardCard
-            icon={<Work sx={{ fontSize: 40 }} />}
             title="Projects"
             value={stats.projects}
-            color="#dc004e"
+            icon={<Work sx={{ fontSize: 40 }} />}
+            color={theme.palette.secondary.main}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <DashboardCard
-            icon={<Event sx={{ fontSize: 40 }} />}
             title="Active Projects"
             value={stats.activeProjects}
-            color="#4caf50"
+            icon={<Event sx={{ fontSize: 40 }} />}
+            color={theme.palette.success.main}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <DashboardCard
-            icon={<Receipt sx={{ fontSize: 40 }} />}
             title="Upcoming Events"
             value={stats.upcomingEvents}
-            color="#dc004e"
+            icon={<Event sx={{ fontSize: 40 }} />}
+            color={theme.palette.warning.main}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <DashboardCard
-            icon={<Timer sx={{ fontSize: 40 }} />}
             title="Pending Invoices"
             value={stats.pendingInvoices}
-            color="#ff9800"
+            icon={<Receipt sx={{ fontSize: 40 }} />}
+            color={theme.palette.error.main}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <DashboardCard
-            icon={<Mail sx={{ fontSize: 40 }} />}
             title="Time Entries"
             value={stats.timeEntries}
-            color="#2196f3"
+            icon={<Timer sx={{ fontSize: 40 }} />}
+            color={theme.palette.info.main}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <DashboardCard
-            icon={<Folder sx={{ fontSize: 40 }} />}
             title="Unread Messages"
             value={stats.unreadMessages}
-            color="#1565c0"
+            icon={<Mail sx={{ fontSize: 40 }} />}
+            color={theme.palette.primary.light}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <DashboardCard
-            icon={<Folder sx={{ fontSize: 40 }} />}
             title="New Files"
             value={stats.newFiles}
-            color="#c51162"
+            icon={<Folder sx={{ fontSize: 40 }} />}
+            color={theme.palette.secondary.light}
           />
         </Grid>
       </Grid>

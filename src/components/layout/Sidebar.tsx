@@ -85,7 +85,7 @@ const navigationItems: NavigationItem[] = [
   },
 ];
 
-export const Sidebar: React.FC = () => {
+export const Sidebar = (props: { sx?: any }) => {
   const drawerWidth = 240;
   const { role } = useAuth();
   const router = useRouter();
@@ -94,10 +94,10 @@ export const Sidebar: React.FC = () => {
     <Drawer
       variant="permanent"
       sx={{
-        width: drawerWidth,
+        width: '20%',
         flexShrink: 0,
         '& .MuiDrawer-paper': {
-          width: drawerWidth,
+          width: '20%',
           boxSizing: 'border-box',
         },
       }}

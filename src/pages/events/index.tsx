@@ -51,8 +51,8 @@ interface Event {
 export default function Events() {
   const { role } = useAuth();
   const [events, setEvents] = React.useState<Event[]>([]);
-  const [activeTab, setActiveTab] = React.useState(0);
   const [loading, setLoading] = React.useState(true);
+  const [activeTab, setActiveTab] = React.useState(0);
   const theme = useTheme();
 
   const fetchEvents = async () => {
@@ -107,7 +107,11 @@ export default function Events() {
   };
 
   return (
-    <Box>
+    <Box sx={{
+          width: '100%',
+          p: 3,
+          mt: 2
+        }}>
       <Typography variant="h4" gutterBottom>
         Events
       </Typography>

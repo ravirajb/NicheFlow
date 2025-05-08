@@ -74,8 +74,8 @@ export default function TimeTracking() {
   const [timeEntries, setTimeEntries] = React.useState<TimeEntry[]>([]);
   const [projects, setProjects] = React.useState<Project[]>([]);
   const [tasks, setTasks] = React.useState<Task[]>([]);
-  const [activeTab, setActiveTab] = React.useState(0);
   const [loading, setLoading] = React.useState(true);
+  const [activeTab, setActiveTab] = React.useState(0);
   const [openDialog, setOpenDialog] = React.useState(false);
   const [selectedProject, setSelectedProject] = React.useState<string | null>(null);
   const [selectedTask, setSelectedTask] = React.useState<string | null>(null);

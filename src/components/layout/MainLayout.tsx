@@ -30,35 +30,17 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   }
 
   return (
-    <Box sx={{
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100vh',
-      overflow: 'hidden'
-    }}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{
-        display: 'flex',
-        flexGrow: 1,
-        width: '100%',
-        overflow: 'hidden'
-      }}>
+      <Box sx={{ display: 'flex', minHeight: '100vh' }}>
         <Sidebar />
         <Box
           component="main"
           sx={{
             flexGrow: 1,
-            p: 2,
-            width: '100%',
-            ml: 240,
-            transition: theme.transitions.create('margin', {
-              easing: theme.transitions.easing.easeOut,
-              duration: theme.transitions.duration.enteringScreen,
-            }),
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 1,
-            overflow: 'auto'
+            p: 3,
+            pl: { sm: 12 },
+            width: { sm: `calc(100% - 240px)` },
           }}
         >
           <Navbar onLogout={() => window.location.href = '/auth/signout'} />
@@ -67,6 +49,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           </Container>
         </Box>
       </Box>
-    </Box>
+    </ThemeProvider>
   );
 };
+

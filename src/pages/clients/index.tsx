@@ -93,7 +93,11 @@ export default function Clients() {
   );
 
   return (
-    <Box>
+    <Box sx={{
+          width: '100%',
+          p: 3,
+          mt: 2
+        }}>
       <Typography variant="h4" gutterBottom>
         Clients
       </Typography>
